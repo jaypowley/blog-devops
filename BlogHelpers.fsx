@@ -16,7 +16,7 @@ type PostObject = {
     }
 
 let replaceSpaceWithHyphen (x:string) = x.Replace(" ", "-")
-let removeNonHtmlCharacters (x:string) = x.Replace("(", "-").Replace(")","-").Replace("'","").Replace(":","").Replace(".","").Replace("–","-")
+let removeNonHtmlCharacters (x:string) = x.Replace("(", "-").Replace(")","-").Replace("'","").Replace(":","").Replace(".","").Replace("–","-").Replace("/","")
 let removeMultipleHyphens (x:string) = Regex.Replace(x, "-+", "-")
 let trimHyphen (x:string) = x.Trim('-')
 let toLower (x:string) = x.ToLower()

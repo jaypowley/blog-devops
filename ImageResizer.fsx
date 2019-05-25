@@ -1,5 +1,5 @@
 
-#r @"C:\Shared Resources\ImageResizer\ImageResizer.4.2.5\lib\net45\ImageResizer.dll"
+#r @"lib\ImageResizer\ImageResizer.4.2.5\lib\net45\ImageResizer.dll"
 
 open ImageResizer
 open System.IO

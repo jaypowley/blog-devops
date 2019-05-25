@@ -1,6 +1,6 @@
 module Blog.Webscraper
 
-#r "../../Shared Resources/FSharp.Data/FSharp.Data.3.0.0/lib/net45/FSharp.Data.dll"
+#r @"lib\FSharp.Data\FSharp.Data.3.0.0\lib\net45\FSharp.Data.dll"
 #load "BlogHelpers.fsx"
 open BlogHelpers
 open FSharp.Data
