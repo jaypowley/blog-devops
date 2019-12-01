@@ -45,11 +45,11 @@ let getAboutTextAndSource (data:(string * string) list) =
     let breweryName = fst (List.item 1 data)
     let beerPage = HtmlDocument.Load(urlSource + beerLink)
     let breweryPage = HtmlDocument.Load(urlSource + breweryLink)
-
     let aboutBeer = beerPage.CssSelect("div.beer-descrption-read-less").Head.InnerText()
     let aboutBrewery = breweryPage.CssSelect("div.beer-descrption-read-less").Head.InnerText()
     let beerStyle = beerPage.CssSelect("div.name p.style").Head.InnerText()
-    
+    let beerStyles = matchStyles beerStyle breweryName
+
     if aboutBeer <> "Show Less" then
         aboutText <- cleanAboutText aboutBeer
         aboutHeading <- "About " + beerName
@@ -63,7 +63,7 @@ let getAboutTextAndSource (data:(string * string) list) =
         aboutHeading <- String.Empty
         untappdLink <- String.Empty
 
-    (aboutHeading.Trim(), aboutText.Trim(), beerStyle, untappdLink)
+    (aboutHeading.Trim(), aboutText.Trim(), beerStyles, untappdLink)
 
 let mapToType beerName breweryName consumedDate aboutHeading aboutText beerStyle untappdLink =  
     let couldParse, parsedDate = DateTime.TryParse(consumedDate)
