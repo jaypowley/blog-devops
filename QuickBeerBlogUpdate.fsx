@@ -7,9 +7,7 @@ open BlogHelpers
 open Blog.Webscraper
 open System.IO
 
-let formatPostName (date:string) (text:string) = formatInput (date + "-" + text)
-
-let beerList = allPosts 15
+let beerList = allPosts 1
                 //getBeerList
 
 for beer in beerList do

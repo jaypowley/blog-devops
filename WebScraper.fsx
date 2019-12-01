@@ -35,6 +35,14 @@ let checkinBottom (checkIn:HtmlNode) =
     |> List.map(fun a -> a.InnerText().Trim())
     |> List.filter(fun (title) -> title <> "View Detailed Check-in" && title <> "Delete Check-In")
 
+let getBeerPage (url:string) = HtmlDocument.Load(url)
+let getBeerAboutText (beerPage:HtmlDocument) = beerPage.CssSelect("div.beer-descrption-read-less").Head.InnerText()
+let getBreweryPage (url:string) = HtmlDocument.Load(url)
+let getBreweryAboutText (breweryPage:HtmlDocument) = breweryPage.CssSelect("div.beer-descrption-read-less").Head.InnerText()
+let getBeerStyles (beerPage:HtmlDocument) (breweryName:string) = 
+    let beerStyle = beerPage.CssSelect("div.name p.style").Head.InnerText()
+    matchStyles beerStyle breweryName
+
 let getAboutTextAndSource (data:(string * string) list) =
     let mutable aboutText = String.Empty
     let mutable aboutHeading = String.Empty
@@ -43,12 +51,11 @@ let getAboutTextAndSource (data:(string * string) list) =
     let beerName = fst data.Head 
     let breweryLink = snd (List.item 1 data)
     let breweryName = fst (List.item 1 data)
-    let beerPage = HtmlDocument.Load(urlSource + beerLink)
-    let breweryPage = HtmlDocument.Load(urlSource + breweryLink)
-    let aboutBeer = beerPage.CssSelect("div.beer-descrption-read-less").Head.InnerText()
-    let aboutBrewery = breweryPage.CssSelect("div.beer-descrption-read-less").Head.InnerText()
-    let beerStyle = beerPage.CssSelect("div.name p.style").Head.InnerText()
-    let beerStyles = matchStyles beerStyle breweryName
+    let beerPage = getBeerPage (urlSource + beerLink)
+    let breweryPage = getBreweryPage (urlSource + breweryLink)
+    let aboutBeer = getBeerAboutText beerPage
+    let aboutBrewery = getBreweryAboutText breweryPage
+    let beerStyles = getBeerStyles beerPage breweryName
 
     if aboutBeer <> "Show Less" then
         aboutText <- cleanAboutText aboutBeer
@@ -101,7 +108,7 @@ let getPostDataList node =
     let result = mapToType beerName breweryName consumedDate aboutHeading aboutText beerStyle untappdLink
     result
 
-// Not all, but lastest *postcount* (max of 15) posts
+// Not all, but latest *postcount* (max of 15) posts
 let allPosts postCount = 
     [ 
         for item in Seq.take postCount items do

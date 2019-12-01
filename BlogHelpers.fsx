@@ -47,6 +47,8 @@ let formatInput (x:string) = toLower x
                                 |> removeMultipleHyphens
                                 |> trimHyphen
 
+let formatPostName (date:string) (text:string) = formatInput (date + "-" + text)
+
 // Removes " Show Less" from the About text
 let cleanAboutText (x:string) = let pattern = "((?s).*)( Show Less)"
                                 let match1 = Regex.Match(x, pattern)

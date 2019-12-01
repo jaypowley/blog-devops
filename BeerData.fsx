@@ -8,32 +8,23 @@ let getBeerList =
      let beerList =
           [ 
 
-           {   PostDate = new DateTime(2019, 3, 7);
-                BeerName = "Oil Man Bourbon Barrel Imperial Stout";
-                BreweryName = "Elevation Beer Company";
-                AboutHeader = "About Elevation Beer Company";
-                AboutText = "Elevation Beer Company is a Colorado microbrewery specializing in seasonal speciality and barrel aged beers for the craft beer fanatic.";
-                Tags = "Stout, BBA, Tavour";
-                UntappdLink = "https://untappd.com/elevationbeerco";
-                BeerImgLink = "https://jasonpowley.com/assets/img/2019-03-07-oil-man-bourbon-barrel-imperial-stout.jpeg" };
+           {   PostDate = new DateTime(2019, 5, 25);
+                BeerName = "Sunday IPA";
+                BreweryName = "Martin House Brewing Company";
+                AboutHeader = "About Sunday IPA";
+                AboutText = "Triple IPA w/ Centennial, Cascade, and Hallertau Blanc hops. 4 pack and draft release March 2019.";
+                Tags = "IPA, TIPA, Tavour";
+                UntappdLink = "https://untappd.com/b/martin-house-brewing-company-sunday-ipa/3121267";
+                BeerImgLink = "https://jasonpowley.com/assets/img/2019-05-25-sunday-ipa.jpeg" };
 
-           {   PostDate = new DateTime(2019, 3, 8);
-                BeerName = "Hooray Beer!";
-                BreweryName = "";
-                AboutHeader = "";
-                AboutText = "";
-                Tags = "";
-                UntappdLink = "";
-                BeerImgLink = "https://jasonpowley.com/assets/img/2019-03-08-hooray-beer.jpeg" };
-
-           {   PostDate = new DateTime(2019, 3, 8);
-                BeerName = "Bourbon Barrel Aged Dark Star (2017)";
-                BreweryName = "Fremont Brewing";
-                AboutHeader = "About Bourbon Barrel Aged Dark Star (2017)";
-                AboutText = "This year’s release is a blend of 24, 18, 12, and 8-month Bourbon Barrel-Aged Dark Star in 7-12-year old Kentucky bourbon barrels. The roasted and chocolate malts complement the smooth oats to bring you a stout delight wrapped in the gentle embrace of bourbon barrel-aged warmth. A touch of sweetness dances in balance with the hops to finish with a wave, and then she’s gone.";
-                Tags = "Stout, Oatmeal Stout, BBA, Tavour";
-                UntappdLink = "https://www.fremontbrewing.com/bourbon-dark-star";
-                BeerImgLink = "https://jasonpowley.com/assets/img/2019-03-08-bourbon-barrel-aged-dark-star-2017.jpeg" };
+           {   PostDate = new DateTime(2019, 5, 26);
+                BeerName = "Kentucky Breakfast Stout (KBS) (2019)";
+                BreweryName = "Founders Brewing Co.";
+                AboutHeader = "About Kentucky Breakfast Stout (KBS) (2019)";
+                AboutText = "What we’ve got here is an imperial stout brewed with a massive amount of coffee and chocolates, then cave-aged in oak bourbon barrels for an entire year to make sure wonderful bourbon undertones come through in the finish. Makes your taste buds squeal with delight.";
+                Tags = "Stout, BBA";
+                UntappdLink = "https://untappd.com/b/founders-brewing-co-kentucky-breakfast-stout-kbs-2019/3114973";
+                BeerImgLink = "https://jasonpowley.com/assets/img/2019-05-26-kentucky-breakfast-stout-kbs-2019.jpeg" };
 
            ]
      beerList
@@ -41,13 +32,13 @@ let getBeerList =
 
 (* Sample data
 
-{    PostDate = new DateTime(2019, 3, 7);
-     BeerName = "";
+{    PostDate = new DateTime(2019, XX, XX);
+     BeerName = "Hooray Beer!";
      BreweryName = "";
-     AboutHeader = "About ";
+     AboutHeader = "";
      AboutText = "";
-     Tags = "";
-     UntappdLink = "";
-     BeerImgLink = "https://jasonpowley.com/assets/img/" };
+     Tags = "General, Tavour";
+     UntappdLink = "https://about.tavour.com/";
+     BeerImgLink = "https://jasonpowley.com/assets/img/2019-XX-XX-hooray-beer.jpeg" };
 
 *)
