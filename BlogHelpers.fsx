@@ -127,3 +127,8 @@ let matchStyles (style:string) (brewery:string) =
                 // | "Witbier" -> ""
                 | _ -> style
     tags + paCraftBrewed
+
+let tryParseDateTime (input:string) =
+    match DateTime.TryParse input with
+    | true, result -> Some result
+    | _ -> None    

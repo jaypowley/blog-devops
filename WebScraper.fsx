@@ -73,10 +73,10 @@ let getAboutTextAndSource (data:(string * string) list) =
     (aboutHeading.Trim(), aboutText.Trim(), beerStyles, untappdLink)
 
 let mapToType beerName breweryName consumedDate aboutHeading aboutText beerStyle untappdLink =  
-    let couldParse, parsedDate = DateTime.TryParse(consumedDate)
-    let postDate = match couldParse with
-                    | true -> parsedDate
-                    | false -> DateTime.Today 
+    let parsedDate = tryParseDateTime consumedDate
+    let postDate = match parsedDate with
+                    | Some x -> x
+                    | None -> DateTime.Today 
    
     let formattedDate = postDate.ToString "yyyy-MM-dd"    
     let formatImageUrl (date:string) (text:string) = formatInput (date + "-" + text) + ".jpeg"

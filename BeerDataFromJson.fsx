@@ -1,12 +1,12 @@
 
-#r "C:/Shared Resources/FSharp.Data/FSharp.Data.3.0.0/lib/net45/FSharp.Data.dll"
+#r "C:\\Users\\jason\\OneDrive\\Desktop\\My Docs\\GitHub\\blog-devops\\lib\\FSharp.Data\\FSharp.Data.3.0.0\\lib\\net45\\FSharp.Data.dll"
  
 open FSharp.Data
 open System
 open System.IO
 open System.Text.RegularExpressions
  
-type SourceData = JsonProvider<"C:/Users/Jason/Desktop/beer_data_07292019.json">
+type SourceData = JsonProvider<"C:\\Users\\jason\\OneDrive\\Desktop\\BeerData_09192021.json">
  
 let beers = SourceData.GetSamples()
  
@@ -22,7 +22,7 @@ type PostObject = {
     }
  
 let replaceSpaceWithHyphen (x:string) = x.Replace(" ", "-")
-let removeNonHtmlCharacters (x:string) = x.Replace("(", "-").Replace(")","-").Replace("'","").Replace(":","").Replace(".","").Replace("–","-").Replace("/","")
+let removeNonHtmlCharacters (x:string) = x.Replace("(", "-").Replace(")","-").Replace("'","").Replace(":","").Replace(".","").Replace("–","-").Replace("/","").Replace("?","").Replace("*","").Replace("[","").Replace("]","")
 let removeMultipleHyphens (x:string) = Regex.Replace(x, "-+", "-")
 let trimHyphen (x:string) = x.Trim('-')
 let toLower (x:string) = x.ToLower()
@@ -34,7 +34,9 @@ let formatInput (x:string) = replaceSpaceWithHyphen x
                                 |> toLower
  
 let formatPostName (date:string) (text:string) = formatInput (date + "-" + text)
- 
+
+let getPostYearMonth beer = beer.PostDate.ToString("yyyy"), beer.PostDate.ToString("MM")
+
 let query1 =
     query {
         for beer in beers do
@@ -50,12 +52,8 @@ let query1 =
                 BeerImgLink =  match beer.PhotoUrl with
                                 | Some x -> x
                                 | None -> String.Empty;
-        };
-        take 10
+        };        
     }
- 
-//type Pair = {Number : int; Product : int;}
-//let productPairs = list |> List.map(fun e -> {Number = e; Product = e*2});;
 
 let mapToType (beerName:string) (breweryName:string) = beerName + breweryName
  
@@ -64,7 +62,9 @@ let beerList =  query1 |> Seq.toList
 for beer in beerList do
     let formattedPostName = formatPostName (beer.PostDate.ToString "MM-dd") beer.BeerName
     let fullBeerName = beer.BeerName + " by " + beer.BreweryName
-    let outputFileName = @"C:\FSharp Scripts\blog related\" + formattedPostName + ".md"
+    let year, month = getPostYearMonth beer
+    let outputFolder = @"D:\blog stuff\BlogOutputFromJson\" + year + @"\" + month
+    let outputFileName = outputFolder + @"\" + formattedPostName + ".md"
  
     let header = "## " + fullBeerName + "\r\n"
     let aboutBeer = "### " + beer.AboutHeader + "\r\n"
@@ -81,6 +81,10 @@ for beer in beerList do
                             + "\";\r\n Description = \"\";\r\n }\r\n \r\n"
  
     //printf "%s\r\n" outputFileName
+    //Create Directory
+    Directory.CreateDirectory(outputFolder);
+
+    //Write File
     File.WriteAllText(outputFileName, generatePostHeader)
     File.AppendAllText(outputFileName, "\r\n")
     File.AppendAllText(outputFileName, header)
@@ -95,6 +99,3 @@ for beer in beerList do
     File.AppendAllText(outputFileName, "\r\n")
     File.AppendAllText(outputFileName, untappdUrl)
     File.AppendAllText(outputFileName, beerPicUrl)
-
- 
-
